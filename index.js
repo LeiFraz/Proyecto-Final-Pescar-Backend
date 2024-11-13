@@ -11,4 +11,6 @@ const PORT = process.env.PORT || 5000;
 
 //conexion con MongoDB
 
+
+//escuchar servidor
 app.listen(PORT, () => {console.log('Servidor ejecutandose')})
