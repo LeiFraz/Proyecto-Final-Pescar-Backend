@@ -1,0 +1,37 @@
+{
+  "name": "proyecto-final-pescar-backend",
+  "version": "1.0.0",
+  "description": "Backend del proyecto de la Fundacion Pescar",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "node --watch .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeiFraz/Proyecto-Final-Pescar-Backend.git"
+  },
+  "keywords": [
+    "Node.js",
+    "MongoDB",
+    "Mongoose"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeiFraz/Proyecto-Final-Pescar-Backend/issues"
+  },
+  "homepage": "https://github.com/LeiFraz/Proyecto-Final-Pescar-Backend#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.8.1"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.5",
+    "morgan": "^1.10.0"
+  }
+}
