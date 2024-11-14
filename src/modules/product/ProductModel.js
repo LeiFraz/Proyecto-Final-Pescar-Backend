@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const productSchema = mongoose.Schema({
     id_emprendimiento: {
-        type: ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
         unique: true
     },

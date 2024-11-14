@@ -1,10 +1,10 @@
 //Controlador para las validaciones, en este se llama a los servicios
-import * as servicesU from './UserServices.js'
+import * as services from './UserServices.js'
 
 export const findAll = async(req, res) => {
     try{
         //llamamos al servicio para que haga la consulta
-        const data = await servicesU.findAll();
+        const data = await services.findAll();
         //console.log(data)
         //comprobamos si trae o no algo
         if (data.length === 0 || data === null) {
@@ -13,7 +13,7 @@ export const findAll = async(req, res) => {
         }
 
         //en caso de que todo este bien, se responde con los datos
-        res.status(200).json(data);
+        res.status(201).json(data);
         return;
 
     } catch(error){
@@ -27,7 +27,7 @@ export const createUser = async(req, res) => {
         //recibo un json del front, desde el body
         const body = req.body;
         //llamamos al servicio de crear un usuario
-        const data = await servicesU.createUser(body)
+        const data = await services.createUser(body)
 
         console.log("estoy en el controlador")
         console.log(data)

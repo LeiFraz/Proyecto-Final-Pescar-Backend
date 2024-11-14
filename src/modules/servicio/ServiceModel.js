@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const serviceSchema = mongoose.Schema({
     id_emprendimiento: {
-        type: ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
         unique: true
     },
