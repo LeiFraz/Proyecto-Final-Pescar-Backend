@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const entrepreneurSchema = mongoose.Schema({
     id_usuario: {
-        type: ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
         unique: true
     },

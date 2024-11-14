@@ -2,12 +2,12 @@ import mongoose from 'mongoose'
 
 const publicationSchema = mongoose.Schema({
     id_usuario: {
-        type: ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
         unique: true
     },
     id_producto_servicio: {
-        type: ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
         unique: true
     },
