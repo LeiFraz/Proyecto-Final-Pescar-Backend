@@ -24,7 +24,9 @@ export const findAll = async(req, res) => {
 
 export const createUser = async(req, res) => {
     try {
+        //recibo un json del front, desde el body
         const body = req.body;
+        //llamamos al servicio de crear un usuario
         const data = await servicesU.createUser(body)
 
         console.log("estoy en el controlador")

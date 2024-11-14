@@ -15,7 +15,9 @@ export const findAll = async(req, res) => {
 
 export const createUser = async(body) => {
     try {
+        //creo el modelo y lo guardo en una constante
         const uModel = new usersModel(body)
+        //ejecuto el modelo para guardar lo que viene en el body
         const response = await uModel.save()
 
         console.log("dentro del servicio")
