@@ -32,3 +32,22 @@ export const createEntrepreneur = async(req,res) => {
         res.status(500).json({error: 'Hubo un error con el servidor'})
     }
 }
+
+export const modifyEntrepreneur = async(req,res) => {
+    try {
+        const id = req.params.id;
+        const body = req.body;
+        const data = await services.modifyEntrepreneur(id, body)
+
+        if(!data){
+            res.status(404).json({message: 'No se pudo modificar el emprendimiento'})
+            return;
+        }
+
+        res.status(200).json(data)
+        return;
+
+    } catch (error) {
+        res.status(500).json({error: 'Hubo un error con el servidor'})
+    }
+}
