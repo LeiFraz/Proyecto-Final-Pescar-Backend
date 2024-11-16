@@ -1,5 +1,4 @@
 import entrepreneurModel from "./EntrepreneurModel.js"
-import mongoose from 'mongoose';
 
 export const findAll = async(req,res) => {
     try {
@@ -7,6 +6,26 @@ export const findAll = async(req,res) => {
         return response
 
     } catch(error) {
+        return null
+    }
+}
+
+export const findById = async(id) => {
+    try {
+        const response = await entrepreneurModel.findById(id)
+        return response;
+    } catch (error) {
+        return null
+    }
+}
+
+export const findTypeEntrepreneur = async(tipo_emprendimiento) => {
+    try {  
+        const response = await entrepreneurModel.find({tipo_emprendimiento: tipo_emprendimiento})
+
+        return response
+
+    } catch (error) {
         return null
     }
 }
@@ -38,6 +57,16 @@ export const modifyEntrepreneur = async(id, body) => {
         const response = await entrepreneur.save();
         
         return response
+    } catch (error) {
+        return null
+    }
+}
+
+export const deleteEntrepreneur = async(id) => {
+    try {
+        const response = await entrepreneurModel.deleteOne({_id: id})
+        
+        return response;
     } catch (error) {
         return null
     }
