@@ -5,6 +5,8 @@ import cors from 'cors'
 //importacion de rutas
 import usersRouter from '../modules/usuario/UserRoutes.js';
 import entrepreneurRouter from '../modules/emprendimiento/EntrepreneurRoutes.js'
+import publicationRouter from '../modules/publicacion/PublicationRoutes.js'
+import categoryRouter from '../modules/categoria/CategoryRoutes.js';
 
 //instancia de express
 const app = express();
@@ -17,6 +19,8 @@ app.use(cors())
 //RUTAS
 app.use('/api/usuario', usersRouter);
 app.use('/api/emprendimiento', entrepreneurRouter)
+app.use('/api/publicacion', publicationRouter)
+app.use('/api/categoria', categoryRouter)
 
 app.use(express.static('public'));
 

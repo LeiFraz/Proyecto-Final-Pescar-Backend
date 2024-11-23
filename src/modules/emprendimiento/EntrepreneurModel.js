@@ -20,8 +20,14 @@ const entrepreneurSchema = mongoose.Schema({
     },
     tipo_emprendimiento: {
         type: String,
-        enum: ['Producto','Servicio'],
+        enum: ['Productos','Servicios','Ambos'],
         required: true
+    },
+    foto_perfil:{
+        type: String
+    },
+    foto_banner:{
+        type: String
     },
     fecha_creacion: {
         type: Date,

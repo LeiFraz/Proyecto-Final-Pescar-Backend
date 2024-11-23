@@ -1,19 +1,22 @@
 import mongoose from 'mongoose'
 
 const publicationSchema = mongoose.Schema({
-    id_usuario: {
+    id_emprendimiento: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        unique: true
+        ref: 'emprendimiento'
     },
-    id_producto_servicio: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        unique: true
+    nombre:{
+        type:String,
+        required:true
+    },
+    tipo:{
+        type: String,
+        enum: ['producto', 'servicio'],
+        required: true
     },
     fecha_publicacion: {
-        //la fecha publicacion es de la publicacion o del producto/servicio
-        //se repite en publicacion, servicio y producto
+
         type: Date,
         default: Date.now
     },
@@ -22,15 +25,23 @@ const publicationSchema = mongoose.Schema({
         default: true
     },
     precio: {
-        //precio se establece en la publicacion o en el producto/servicio?
         type: Number,
         required: true
+    },
+    descuento:{
+        type: Number,
     },
     descripcion: {
         type: String
     },
+    id_categoria:{
+        type:mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'categoria'
+    },
     imagenes: {
         type: [String],
+        required: false,
         validate: {
             validator: (arr) => {
                 //^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$
@@ -40,7 +51,11 @@ const publicationSchema = mongoose.Schema({
             message: 'Debe ingresar urls validas.'
         },
         maxlength: 3
-    }
+    },
+    datos_venta: {
+        veces_vendido: { type: Number, default: 0 }, // Número de veces vendido
+        ganancia_total: { type: Number, default: 0 }, // Ganancia total
+    },
 })
 
 const publicationModel = mongoose.model('publicacion', publicationSchema)
