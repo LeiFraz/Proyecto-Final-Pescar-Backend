@@ -9,6 +9,57 @@ export const findAll = async(req,res) => {
         return null
     }
 }
+export const findFilters = async(filtros, skip, limit, ordenar) => {
+    try {
+        let query = publicationModel.find(filtros || {});
+        
+        // Aplicar ordenamiento
+        if (ordenar) {
+            switch(ordenar) {
+                case 'A-Z':
+                    query = query.sort({ nombre: 1 });
+                    break;
+                case 'Z-A':
+                    query = query.sort({ nombre: -1 });
+                    break;
+                case 'Baratos':
+                    query = query.sort({ 
+                        precio: 1,
+                    });
+                break;
+                case 'Convenir':
+                    query = query.sort({ 
+                        precio: 1,
+                    });
+                break;
+                case 'Caros':
+                query = query.sort({ precio: -1 });
+                break;
+            }
+        }
+        
+        // Aplicar paginación
+        query = query.skip(skip).limit(limit);
+        
+        // Poblar categoría
+        query = query.populate('id_categoria');
+        
+        const response = await query.exec();
+        return response || [];
+        
+    } catch(error) {
+        console.error('Error en findAll (servicio):', error);
+        return [];
+    }
+};
+export const getTotal = async(filtros) => {
+    try {
+        return await publicationModel.countDocuments(filtros || {});
+    } catch(error) {
+        console.error('Error en getTotal (servicio):', error);
+        return 0;
+    }
+};
 
 export const findById = async(id) => {
     try {

@@ -4,6 +4,7 @@ import * as publication from './PublicationController.js'
 const publicationRouter = express.Router()
 
 publicationRouter.get('/', publication.findAll)
+publicationRouter.get('/filtros', publication.findFilters)
 publicationRouter.get('/:id', publication.findById)
 publicationRouter.get('/tipo/:tipo_publicacion', publication.findTypePublication)
 publicationRouter.post('/crear', publication.createPublication)

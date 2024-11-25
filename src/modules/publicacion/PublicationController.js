@@ -16,6 +16,60 @@ export const findAll = async(req, res) => {
     }
 }
 
+export const findFilters = async(req, res) => {
+    try {
+        const filtros = {};
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 15;
+        const skip = (page - 1) * limit;
+
+        // Leer filtros desde los query params
+        const { tipo, categoria, rangoPrecio, descuento, nombre, ordenar } = req.query;
+
+        if (tipo && tipo !== 'Todo') {
+            filtros.tipo = tipo.toLowerCase();
+        }
+
+        if (categoria) {
+            filtros.id_categoria = categoria;
+        }
+        if(ordenar=="Baratos" || ordenar=="Caros"){
+            filtros.precio = { $gte: 1};
+        }
+        if (rangoPrecio) {
+            const [min, max] = rangoPrecio.split('-').map(Number);
+            filtros.precio = { $gte: min, $lte: max };
+        }
+
+        if (descuento) {
+            filtros.descuento = { $gte: Number(descuento) };
+        }
+
+        if (nombre) {
+            filtros.nombre = { $regex: nombre, $options: 'i' };
+        }
+
+        // Obtener total de documentos para la paginación
+        const total = await services.getTotal(filtros);
+        
+        // Llamar al servicio con los filtros y paginación
+        const data = await services.findFilters(filtros, skip, limit, ordenar);
+    
+        res.status(200).json({
+            data,
+            pagination: {
+                currentPage: page,
+                totalPages: Math.ceil(total / limit),
+                totalItems: total,
+                itemsPerPage: limit
+            }
+        });
+    } catch(error) {
+        console.error('Error en findAll (controlador):', error);
+        res.status(500).json({error: 'Hubo un error con el servidor'});
+    }
+};
+
 export const findById = async(req,res) => {
     try {
         const id = req.params.id
