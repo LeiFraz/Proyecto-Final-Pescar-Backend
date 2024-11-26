@@ -35,6 +35,9 @@ export const findFilters = async(filtros, skip, limit, ordenar) => {
                 case 'Caros':
                 query = query.sort({ precio: -1 });
                 break;
+                case 'MasDescuento':
+                query = query.sort({ descuento: -1 });
+                break;
             }
         }
         
