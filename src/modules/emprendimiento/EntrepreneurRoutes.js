@@ -4,6 +4,7 @@ import * as entrepreneur from './EntrepreneurController.js'
 const entrepreneurRouter = express.Router()
 
 entrepreneurRouter.get('/', entrepreneur.findAll)
+entrepreneurRouter.get('/filtros', entrepreneur.findFilters)
 entrepreneurRouter.get('/:id', entrepreneur.findById)
 entrepreneurRouter.get('/tipo/:tipo_emprendimiento', entrepreneur.findTypeEntrepreneur);
 entrepreneurRouter.post('/crear', entrepreneur.createEntrepreneur)

@@ -9,7 +9,52 @@ export const findAll = async(req,res) => {
         return null
     }
 }
+export const findLimit = async(limit) => {
+    try {
+        const response = await categoryModel.find().limit(limit);
+        return response;
+    } catch (error) {
+        return null
+    }
+}
+export const findFilters = async(filtros, skip, limit, ordenar) => {
 
+    try {
+
+        let query = categoryModel.find(filtros || {});
+        
+        if (ordenar) {
+            switch (ordenar) {
+                case 'A-Z':
+                    query = query.sort({ nombre: 1 });
+                    break;
+                case 'Z-A':
+                    query = query.sort({ nombre: -1 });
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+        query = query.skip(skip).limit(limit);
+        
+        const response = await query.exec();
+        return response || [];
+        
+    } catch(error) {
+        console.error('Error en findAll (servicio):', error);
+        return [];
+    }
+};
+export const getTotal = async(filtros) => {
+
+    try {
+        return await categoryModel.countDocuments(filtros || {});
+    } catch(error) {
+        console.error('Error en getTotal (servicio):', error);
+        return 0;
+    }
+};
 export const findById = async(id) => {
     try {
         const response = await categoryModel.findById(id)
