@@ -34,11 +34,11 @@ export const findFilters = async(req, res) => {
             filtros.id_categoria = categoria;
         }
         if(ordenar=="Baratos" || ordenar=="Caros"){
-            filtros.precio = { $gte: 1};
+            filtros.precio_actual = { $gte: 1};
         }
         if (rangoPrecio) {
             const [min, max] = rangoPrecio.split('-').map(Number);
-            filtros.precio = { $gte: min, $lte: max };
+            filtros.precio_actual = { $gte: min, $lte: max };
         }
 
         if (descuento) {
@@ -108,6 +108,24 @@ export const findTypePublication = async(req,res) => {
 export const createPublication = async(req,res) => {
     try {
         const body = req.body;
+        console.log(body)
+        if (body.descuento>0 && body.precio) {
+            // Calcular el precio con descuento
+            const descuentoDecimal = body.descuento / 100; // Convertir porcentaje a decimal
+            const precioConDescuento = body.precio * (1 - descuentoDecimal);
+
+            // Redondear a dos decimales
+            body.precio_actual = parseFloat(precioConDescuento.toFixed(2));
+            body.precio_original=parseFloat(body.precio.toFixed(2));
+        }
+        else if(body.descuento==0 && body.precio){
+            body.precio_actual = parseFloat(body.precio.toFixed(2));
+        }
+        else if(body.descuento==0 && body.precio==0){
+            body.precio_actual=0;
+            body.descuento=0;
+        }
+        
         const data = await services.createPublication(body);
         
         if(!data || data === null){ 

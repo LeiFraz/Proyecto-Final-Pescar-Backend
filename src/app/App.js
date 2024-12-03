@@ -7,6 +7,8 @@ import usersRouter from '../modules/usuario/UserRoutes.js';
 import entrepreneurRouter from '../modules/emprendimiento/EntrepreneurRoutes.js'
 import publicationRouter from '../modules/publicacion/PublicationRoutes.js'
 import categoryRouter from '../modules/categoria/CategoryRoutes.js';
+import materialRouter from '../modules/material/MaterialRoutes.js';
+import usedMaterialRouter from '../modules/materialUsado/UsedMaterialRoutes.js';
 
 //instancia de express
 const app = express();
@@ -21,6 +23,8 @@ app.use('/api/usuario', usersRouter);
 app.use('/api/emprendimiento', entrepreneurRouter)
 app.use('/api/publicacion', publicationRouter)
 app.use('/api/categoria', categoryRouter)
+app.use('/api/material', materialRouter)
+app.use('/api/materialusado', usedMaterialRouter)
 
 app.use(express.static('public'));
 

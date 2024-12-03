@@ -24,16 +24,16 @@ export const findFilters = async(filtros, skip, limit, ordenar) => {
                     break;
                 case 'Baratos':
                     query = query.sort({ 
-                        precio: 1,
+                        precio_actual: 1,
                     });
                 break;
                 case 'Convenir':
                     query = query.sort({ 
-                        precio: 1,
+                        precio_actual: 1,
                     });
                 break;
                 case 'Caros':
-                query = query.sort({ precio: -1 });
+                query = query.sort({ precio_actual: -1 });
                 break;
                 case 'MasDescuento':
                 query = query.sort({ descuento: -1 });
@@ -87,6 +87,7 @@ export const findTypePublication = async(tipo_publicacion) => {
 export const createPublication = async(body) => {
     try {
         console.log('Datos recibidos en el servicio:', body); // Log temporal
+        
         const eModel = new publicationModel(body);
         const response = await eModel.save()
 

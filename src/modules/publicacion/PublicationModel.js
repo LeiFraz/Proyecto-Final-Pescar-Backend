@@ -24,9 +24,11 @@ const publicationSchema = mongoose.Schema({
         type: Boolean,
         default: true
     },
-    precio: {
+    precio_original: {
         type: Number,
-        required: true
+    },
+    precio_actual: {
+        type: Number,
     },
     descuento:{
         type: Number,
