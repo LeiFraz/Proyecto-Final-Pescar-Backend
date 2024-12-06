@@ -45,3 +45,11 @@ export const deleteUsedMaterial = async(id) => {
         return null
     }
 }
+export const findById = async(id_publicacion) => {
+    try {
+        const response = await usedMaterialModel.find({ id_publicacion });
+        return response;
+    } catch (error) {
+        return null
+    }
+}

@@ -55,8 +55,12 @@ const publicationSchema = mongoose.Schema({
         maxlength: 3
     },
     datos_venta: {
-        veces_vendido: { type: Number, default: 0 }, // Número de veces vendido
-        ganancia_total: { type: Number, default: 0 }, // Ganancia total
+        veces_vendido: { type: Number, default: 0 }, 
+        ganancia_total: { type: Number, default: 0 }, 
+    },
+    calculo_precio: {
+        precio_transparente: { type: Boolean, default: false },
+        ganancia: { type: Number, default: 0 },
     },
 })
 
