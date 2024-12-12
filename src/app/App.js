@@ -9,6 +9,7 @@ import publicationRouter from '../modules/publicacion/PublicationRoutes.js'
 import categoryRouter from '../modules/categoria/CategoryRoutes.js';
 import materialRouter from '../modules/material/MaterialRoutes.js';
 import usedMaterialRouter from '../modules/materialUsado/UsedMaterialRoutes.js';
+import orderRouter from '../modules/orden/OrderRoutes.js';
 
 //instancia de express
 const app = express();
@@ -25,6 +26,7 @@ app.use('/api/publicacion', publicationRouter)
 app.use('/api/categoria', categoryRouter)
 app.use('/api/material', materialRouter)
 app.use('/api/materialusado', usedMaterialRouter)
+app.use('/api/orden', orderRouter)
 
 app.use(express.static('public'));
 
