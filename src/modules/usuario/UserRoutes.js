@@ -1,7 +1,7 @@
 //rutas establecidas para los usuarios
 import express from 'express';
 import * as user from './UserController.js'
-import verifyToken from '../../middleware/verifytoken.js';
+import verifyToken from 'src\middleware\verifyToken.js';
 
 const usersRouter = express.Router()
 
