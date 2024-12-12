@@ -1,6 +1,6 @@
 //Controlador para las validaciones, en este se llama a los servicios
 import * as services from './UserServices.js'
-
+import * as entrepreneurServices from '../emprendimiento/EntrepreneurServices.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
@@ -43,9 +43,26 @@ import jwt from 'jsonwebtoken'
 //         res.status(500).json({error: 'Hubo un problema con el servidor'})
 //     }
 // }
+export const findById = async(req,res) => {
+    try {
+        const id = req.params.id
+        const data = await services.findById(id)
 
+        if (data.length === 0 || data === null){
+            res.satatus(404).json({message: 'No se pudo encontrar la publicación'})
+            return;
+        }
+
+        res.status(200).json(data)
+        return;
+    } catch (error) {
+        res.status(500).json({error: 'Hubo un error con el servidor'})
+    }
+}
 export const login = async(req,res) => {
     try {
+        let id_emprendimiento="";
+        let nombre_emprendimiento="";
         const body = req.body
 
         //DEBERIA HACER LAS VALIDACIONES PRIMERO
@@ -62,8 +79,14 @@ export const login = async(req,res) => {
             res.status(400).json({message: 'Lo sentimos no se encontró ese usuario.'})
             return;
         }
-        
-        //generar el token
+        const entrepreneurData= await entrepreneurServices.findByUserId(data._id);
+        console.log(entrepreneurData)
+        if(entrepreneurData.length>0){
+            console.log("entra?")
+            id_emprendimiento = entrepreneurData[0]._id;
+            nombre_emprendimiento = entrepreneurData[0].nombre_emprendimiento;
+        }
+        console.log(id_emprendimiento)
         const token = jwt.sign({
             idUsuario: data._id,
             nombre: data.nombre,
@@ -71,7 +94,7 @@ export const login = async(req,res) => {
             email: data.email,
         }, process.env.SECRET_KEY, {expiresIn: '1h'})
         
-        res.status(200).json({data, token})
+        res.status(200).json({data, token, id_emprendimiento, nombre_emprendimiento})
 
     } catch (error) {
         console.log(error)
@@ -104,5 +127,23 @@ export const register = async(req,res) =>{
 
     } catch (error) {
         res.status(500).json({error: 'Hubo un problema con el servidor'})
+    }
+}
+export const modifyUser = async(req,res) => {
+    try {
+        const id = req.params.id;
+        const body = req.body;
+        const data = await services.modifyUser(id, body)
+
+        if(!data){
+            res.status(404).json({message: 'No se pudo modificar el usuario'})
+            return;
+        }
+
+        res.status(200).json(data)
+        return;
+
+    } catch (error) {
+        res.status(500).json({error: 'Hubo un error con el servidor'})
     }
 }

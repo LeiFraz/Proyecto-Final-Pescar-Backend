@@ -158,6 +158,22 @@ export const modifyPublication = async(req,res) => {
         res.status(500).json({error: 'Hubo un error con el servidor'})
     }
 }
+export const findByEntrepreneur= async(req,res) => {
+    try {
+        const id_emprendimiento = req.params.id
+        const data = await services.findByEntrepreneur(id_emprendimiento)
+
+        if (data.length === 0 || data === null){
+            res.status(404).json({message: 'No se pudo encontrar la publicacion'})
+            return;
+        }
+
+        res.status(200).json(data)
+        return;
+    } catch (error) {
+        res.status(500).json({error: 'Hubo un error con el servidor'})
+    }
+}
 
 export const deletePublication = async(req,res) => {
     try {
