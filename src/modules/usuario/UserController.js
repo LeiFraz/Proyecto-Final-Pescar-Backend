@@ -82,7 +82,7 @@ export const login = async(req,res) => {
 export const register = async(req,res) =>{
     try {
         const body = req.body
-
+        console.log(body)
         //DEBERIA HACER LAS VALIDACIONES PRIMERO
         if (!body.email || !body.contrasenia){
             res.status(400).json({message: 'Error faltaron datos para registrarse.'})
