@@ -56,6 +56,15 @@ export const findById = async(id) => {
     }
 }
 
+export const findByUserId = async(id_usuario) => {
+    try {
+        const response = await entrepreneurModel.find({ id_usuario })
+        return response;
+    } catch (error) {
+        return null
+    }
+}
+
 export const findTypeEntrepreneur = async(tipo_emprendimiento) => {
     try {  
         const response = await entrepreneurModel.find({tipo_emprendimiento: tipo_emprendimiento})

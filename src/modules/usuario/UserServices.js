@@ -55,7 +55,14 @@ export const login = async(body) => {
         return null
     }
 }
-
+export const findById = async(id) => {
+    try {
+        const response = await usersModel.findById(id)
+        return response;
+    } catch (error) {
+        return null
+    }
+}
 export const register = async(body) => {
     try {
 
@@ -64,6 +71,26 @@ export const register = async(body) => {
 
         return response
 
+    } catch (error) {
+        return null
+    }
+}
+export const modifyUser = async(id, body) => {
+    try {
+
+        const user = await usersModel.findById(id);
+
+        if (!user) {
+            throw new Error('No se encontró el usuario')
+        }
+
+        Object.keys(body).forEach(key => {
+            user[key] = body[key]
+        })
+
+        const response = await user.save();
+        
+        return response
     } catch (error) {
         return null
     }
