@@ -1,1 +1,0 @@
-//se importa la conexion de la bbdd y las rutas con express de App

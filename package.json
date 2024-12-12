@@ -2,6 +2,7 @@
   "name": "proyecto-final-pescar-backend",
   "version": "1.0.0",
   "description": "Backend del proyecto de la Fundacion Pescar",
+  "type":"module",
   "main": "index.js",
   "scripts": {
     "start": "node .",
