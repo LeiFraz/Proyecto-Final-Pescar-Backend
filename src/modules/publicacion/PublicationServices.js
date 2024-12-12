@@ -63,7 +63,14 @@ export const getTotal = async(filtros) => {
         return 0;
     }
 };
-
+export const findByEntrepreneur = async(id_emprendimiento) => {
+    try {
+        const response = await publicationModel.find({ id_emprendimiento });
+        return response;
+    } catch (error) {
+        return null
+    }
+}
 export const findById = async(id) => {
     try {
         const response = await publicationModel.findById(id)

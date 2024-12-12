@@ -5,11 +5,9 @@ import * as user from './UserController.js'
 
 const usersRouter = express.Router()
 
-// usersRouter.get('/', user.findAll)
-// usersRouter.post('/crear', user.createUser)
+usersRouter.get('/:id', user.findById)
 usersRouter.post('/login', user.login)
 usersRouter.post('/registro', user.register)
-// usersRouter.put('/:id', user.modifyUser)
-// usersRouter.delete('/:id', user.deleteUser)
+usersRouter.put('/:id', user.modifyUser)
 
 export default usersRouter;
