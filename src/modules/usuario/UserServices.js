@@ -43,7 +43,7 @@ export const login = async(body) => {
         }
 
         //comparamos las contraseñas
-        const compare = bcrypt.compare(body.contrasenia, response.contrasenia);
+        const compare = await bcrypt.compare(body.contrasenia, response.contrasenia);
 
         if(!compare){
             return null
