@@ -106,8 +106,9 @@ export const findTypePublication = async(req,res) => {
 }
 export const findLimit = async (req, res) => {
     try {
-        const { limit, tipo, descuento } = req.body;  
+        const { limit, tipo, descuento } = req.query;  // Accede a los parámetros de consulta
 
+        // Llama al servicio pasando los filtros
         const data = await services.findLimit(limit, tipo, descuento);
 
         if (data.length === 0 || data === null) {
