@@ -47,6 +47,14 @@ export const getTotal = async(filtros) => {
         return 0;
     }
 };
+export const findLimit = async(limit) => {
+    try {
+        const response = await entrepreneurModel.find().limit(limit);
+        return response;
+    } catch (error) {
+        return null
+    }
+}
 export const findById = async(id) => {
     try {
         const response = await entrepreneurModel.findById(id)
