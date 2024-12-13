@@ -79,7 +79,31 @@ export const findById = async(id) => {
         return null
     }
 }
+export const findLimit = async (limit, tipo, descuento) => {
+    try {
+        // Inicializa el filtro
+        let query = {};
 
+        // Aplica filtro por tipo si se pasa
+        if (tipo) {
+            query.tipo = tipo;
+        }
+
+        // Aplica filtro por descuento > 0 si se pasa
+        if (descuento) {
+            query.descuento = { $gt: 0 };
+        }
+
+        // Realiza la consulta
+        const response = await publicationModel.find(query)
+            .sort(descuento ? { descuento: -1 } : {})  // Ordena por descuento si se pasa
+            .limit(limit);
+
+        return response;
+    } catch (error) {
+        return null;
+    }
+}
 export const findTypePublication = async(tipo_publicacion) => {
     try {  
         const response = await publicationModel.find({tipo : tipo_publicacion})

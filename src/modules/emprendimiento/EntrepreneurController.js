@@ -15,6 +15,22 @@ export const findAll = async(req, res) => {
         res.status(500).json({error: 'Hubo un error con el servidor'})
     }
 }
+export const findLimit = async(req,res) => {
+    try {
+        const limit = req.params.limit
+        const data = await services.findLimit(limit)
+
+        if (data.length === 0 || data === null){
+            res.status(404).json({message: 'No se pudo encontrar la categoria'})
+            return;
+        }
+
+        res.status(200).json(data)
+        return;
+    } catch (error) {
+        res.status(500).json({error: 'Hubo un error con el servidor'})
+    }
+}
 export const findFilters = async (req, res) => {
     try {
         const filtros = {};
